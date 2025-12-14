@@ -3,20 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HomeBudget - Gestione Spese Personale</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>HomeBudget PRO | Gestione Finanziaria Avanzata</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
+    <!-- Modal Upgrade -->
+    <div id="upgradeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-crown"></i> Scegli il Tuo Piano HomeBudget PRO</h2>
+                <p>Upgrade oggi e sblocca tutte le funzionalità avanzate</p>
+            </div>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="plan-badge free">ATTUALE</div>
+                    <h3>Piano Free</h3>
+                    <div class="price">€0<span>/sempre</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Fino a 50 spese/mese</li>
+                        <li><i class="fas fa-check"></i> 8 categorie base</li>
+                        <li><i class="fas fa-check"></i> Statistiche semplici</li>
+                        <li><i class="fas fa-check"></i> Esportazione CSV</li>
+                        <li><i class="fas fa-times"></i> <span class="feature-disabled">Grafici avanzati</span></li>
+                        <li><i class="fas fa-times"></i> <span class="feature-disabled">Backup cloud</span></li>
+                        <li><i class="fas fa-times"></i> <span class="feature-disabled">Budget predittivo</span></li>
+                    </ul>
+                    <button class="btn-plan current-plan" disabled>
+                        Piano Attuale
+                    </button>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="plan-badge popular-badge">PIÙ POPOLARE</div>
+                    <h3>PRO Annuale</h3>
+                    <div class="price">€49.99<span>/anno</span></div>
+                    <p class="savings">Risparmi €10 rispetto al mensile</p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> <strong>Spese illimitate</strong></li>
+                        <li><i class="fas fa-check"></i> <strong>Categorie illimitate</strong></li>
+                        <li><i class="fas fa-check"></i> Grafici avanzati in tempo reale</li>
+                        <li><i class="fas fa-check"></i> Backup automatico cloud</li>
+                        <li><i class="fas fa-check"></i> Budget predittivo e alert</li>
+                        <li><i class="fas fa-check"></i> Esportazione PDF/Excel</li>
+                        <li><i class="fas fa-check"></i> Supporto prioritario</li>
+                        <li><i class="fas fa-check"></i> Accesso anticipato nuove feature</li>
+                    </ul>
+                    <button class="btn-plan btn-select-plan" data-plan="yearly">
+                        <i class="fas fa-rocket"></i> Scegli Annuale
+                    </button>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>PRO Mensile</h3>
+                    <div class="price">€4.99<span>/mese</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> <strong>Spese illimitate</strong></li>
+                        <li><i class="fas fa-check"></i> <strong>Categorie illimitate</strong></li>
+                        <li><i class="fas fa-check"></i> Grafici avanzati in tempo reale</li>
+                        <li><i class="fas fa-check"></i> Backup automatico cloud</li>
+                        <li><i class="fas fa-check"></i> Budget predittivo e alert</li>
+                        <li><i class="fas fa-check"></i> Esportazione PDF/Excel</li>
+                        <li><i class="fas fa-check"></i> Supporto via email</li>
+                        <li><i class="fas fa-check"></i> Cancellazione in qualsiasi momento</li>
+                    </ul>
+                    <button class="btn-plan btn-select-plan" data-plan="monthly">
+                        Scegli Mensile
+                    </button>
+                </div>
+            </div>
+            
+            <div class="payment-security">
+                <i class="fas fa-shield-alt"></i>
+                <span>Pagamento sicuro al 100% • 14 giorni di prova gratuita • Cancellazione in qualsiasi momento</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Limit Reached Modal -->
+    <div id="limitModal" class="modal">
+        <div class="modal-content limit-modal">
+            <h2><i class="fas fa-lock"></i> Limite Raggiunto!</h2>
+            <div class="limit-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Hai raggiunto il limite di <strong>50 spese/mese</strong> del piano gratuito.</p>
+                <p>Per continuare ad aggiungere spese, upgrade al piano PRO.</p>
+            </div>
+            
+            <div class="limit-stats">
+                <div class="limit-stat">
+                    <div class="stat-value" id="currentExpenses">50</div>
+                    <div class="stat-label">Spese attuali</div>
+                </div>
+                <div class="limit-stat">
+                    <div class="stat-value">50</div>
+                    <div class="stat-label">Limite mensile</div>
+                </div>
+                <div class="limit-stat">
+                    <div class="stat-value" id="daysLeft">0</div>
+                    <div class="stat-label">Giorni al reset</div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn-secondary" id="closeLimitModal">
+                    <i class="fas fa-times"></i> Chiudi
+                </button>
+                <button class="btn-primary" id="upgradeNowBtn">
+                    <i class="fas fa-crown"></i> Upgrade a PRO
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header>
-        <div class="container">
+        <div class="container header-container">
             <div class="logo">
                 <i class="fas fa-wallet"></i>
-                <h1>HomeBudget</h1>
+                <div class="logo-text">
+                    <h1>HomeBudget <span class="pro-badge">PRO</span></h1>
+                    <p class="tagline">Gestione finanziaria intelligente</p>
+                </div>
             </div>
-            <p class="tagline">Gestisci le tue spese in modo semplice e gratuito</p>
+            
+            <nav class="main-nav">
+                <div class="user-info">
+                    <div class="plan-indicator" id="planIndicator">
+                        <span class="plan-badge free-badge">FREE</span>
+                        <span class="plan-text">Piano Gratuito</span>
+                    </div>
+                    <div class="user-menu">
+                        <button class="btn-upgrade" id="openUpgradeModal">
+                            <i class="fas fa-crown"></i> Upgrade
+                        </button>
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </div>
     </header>
 
@@ -25,69 +156,137 @@
         <!-- Dashboard Stats -->
         <section class="dashboard">
             <div class="stat-card">
-                <div class="stat-icon">
+                <div class="stat-icon total-icon">
                     <i class="fas fa-euro-sign"></i>
                 </div>
                 <div class="stat-info">
                     <h3>Spesa Totale</h3>
                     <p class="stat-value">€ <span id="totalExpense">0.00</span></p>
+                    <div class="stat-trend positive">
+                        <i class="fas fa-arrow-up"></i> 12% vs scorso mese
+                    </div>
                 </div>
             </div>
             
             <div class="stat-card">
-                <div class="stat-icon">
+                <div class="stat-icon month-icon">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
                 <div class="stat-info">
                     <h3>Spese Questo Mese</h3>
-                    <p class="stat-value" id="monthCount">0</p>
+                    <p class="stat-value"><span id="monthCount">0</span>/<span id="monthLimit">50</span></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="monthProgress" style="width: 0%"></div>
+                    </div>
                 </div>
             </div>
             
             <div class="stat-card">
-                <div class="stat-icon">
+                <div class="stat-icon average-icon">
                     <i class="fas fa-chart-line"></i>
                 </div>
                 <div class="stat-info">
                     <h3>Media Mensile</h3>
                     <p class="stat-value">€ <span id="monthlyAverage">0.00</span></p>
+                    <div class="stat-trend negative">
+                        <i class="fas fa-arrow-down"></i> 5% vs scorso mese
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card pro-feature">
+                <div class="stat-icon pro-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Budget Residuo</h3>
+                    <p class="stat-value">€ <span id="budgetRemaining">0.00</span></p>
+                    <p class="stat-note">Funzione PRO</p>
                 </div>
             </div>
         </section>
 
+        <!-- Upgrade Banner (for free users) -->
+        <div class="upgrade-banner" id="upgradeBanner">
+            <div class="banner-content">
+                <i class="fas fa-gem"></i>
+                <div class="banner-text">
+                    <h3>Passa a PRO e sblocca tutto il potenziale!</h3>
+                    <p>Spese illimitate • Grafici avanzati • Backup cloud • Supporto prioritario</p>
+                </div>
+                <button class="btn-banner-upgrade" id="bannerUpgradeBtn">
+                    Prova 14 giorni gratis <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
         <!-- Form Aggiunta Spesa -->
         <section class="add-expense">
-            <h2><i class="fas fa-plus-circle"></i> Aggiungi Nuova Spesa</h2>
-            <form id="expenseForm">
-                <div class="form-group">
-                    <label for="amount">
-                        <i class="fas fa-euro-sign"></i> Importo
-                    </label>
-                    <input type="number" id="amount" step="0.01" min="0" placeholder="0.00" required>
+            <div class="section-header">
+                <h2><i class="fas fa-plus-circle"></i> Aggiungi Nuova Spesa</h2>
+                <div class="section-badge free">
+                    LIMITE: <span id="remainingExpenses">50</span> spese rimaste
                 </div>
-                
+            </div>
+            
+            <form id="expenseForm">
                 <div class="form-row">
+                    <div class="form-group">
+                        <label for="amount">
+                            <i class="fas fa-euro-sign"></i> Importo (€)
+                        </label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-euro-sign"></i>
+                            <input type="number" id="amount" step="0.01" min="0" placeholder="0.00" required>
+                        </div>
+                    </div>
+                    
                     <div class="form-group">
                         <label for="category">
                             <i class="fas fa-tag"></i> Categoria
                         </label>
-                        <select id="category" required>
-                            <option value="">Scegli categoria</option>
-                            <option value="cibo">🍕 Cibo</option>
-                            <option value="trasporti">🚗 Trasporti</option>
-                            <option value="bollette">💡 Bollette</option>
-                            <option value="shopping">🛍️ Shopping</option>
-                            <option value="salute">🏥 Salute</option>
-                            <option value="svago">🎬 Svago</option>
-                            <option value="altro">📌 Altro</option>
-                        </select>
+                        <div class="input-with-icon">
+                            <i class="fas fa-tag"></i>
+                            <select id="category" required>
+                                <option value="">Scegli categoria</option>
+                                <option value="cibo">🍕 Cibo & Supermercato</option>
+                                <option value="trasporti">🚗 Trasporti & Auto</option>
+                                <option value="bollette">💡 Bollette & Utilità</option>
+                                <option value="casa">🏠 Casa & Affitto</option>
+                                <option value="salute">🏥 Salute & Benessere</option>
+                                <option value="svago">🎬 Svago & Intrattenimento</option>
+                                <option value="shopping">🛍️ Shopping & Vestiti</option>
+                                <option value="altro">📌 Altro</option>
+                            </select>
+                        </div>
                     </div>
-                    
+                </div>
+                
+                <div class="form-row">
                     <div class="form-group">
                         <label for="date">
                             <i class="fas fa-calendar"></i> Data
                         </label>
-                        <input type="date" id="date" required>
+                        <div class="input-with-icon">
+                            <i class="fas fa-calendar"></i>
+                            <input type="date" id="date" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paymentMethod">
+                            <i class="fas fa-credit-card"></i> Metodo di Pagamento
+                        </label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-credit-card"></i>
+                            <select id="paymentMethod">
+                                <option value="contanti">💵 Contanti</option>
+                                <option value="carta">💳 Carta di Credito</option>
+                                <option value="debito">🏦 Carta di Debito</option>
+                                <option value="bonifico">📤 Bonifico</option>
+                                <option value="altro">🔗 Altro</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 
@@ -95,33 +294,82 @@
                     <label for="description">
                         <i class="fas fa-align-left"></i> Descrizione (opzionale)
                     </label>
-                    <input type="text" id="description" placeholder="Es: Spesa supermercato">
+                    <div class="input-with-icon">
+                        <i class="fas fa-align-left"></i>
+                        <input type="text" id="description" placeholder="Es: Spesa settimanale al supermercato...">
+                    </div>
                 </div>
                 
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-save"></i> Salva Spesa
-                </button>
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit" id="submitExpense">
+                        <i class="fas fa-save"></i> Salva Spesa
+                    </button>
+                    <button type="button" class="btn-secondary" id="clearForm">
+                        <i class="fas fa-times"></i> Cancella
+                    </button>
+                </div>
             </form>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-pie"></i> Analisi Avanzata</h2>
+                <div class="section-badge pro">
+                    <i class="fas fa-crown"></i> FUNZIONE PRO
+                </div>
+            </div>
+            <div class="chart-container">
+                <div class="chart-placeholder">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Sblocca l'Analisi Avanzata</h3>
+                    <p>Upgrade a PRO per visualizzare grafici dettagliati delle tue spese per categoria, trend mensili e confronti.</p>
+                    <button class="btn-upgrade-chart" id="upgradeChartBtn">
+                        <i class="fas fa-crown"></i> Sblocca Grafici
+                    </button>
+                </div>
+                <canvas id="expensesChart" style="display: none;"></canvas>
+            </div>
         </section>
 
         <!-- Lista Spese -->
         <section class="expenses-list">
             <div class="section-header">
-                <h2><i class="fas fa-list"></i> Le Tue Spese</h2>
-                <div class="filters">
-                    <select id="filterCategory">
-                        <option value="all">Tutte le categorie</option>
-                        <option value="cibo">Cibo</option>
-                        <option value="trasporti">Trasporti</option>
-                        <option value="bollette">Bollette</option>
-                        <option value="shopping">Shopping</option>
-                        <option value="salute">Salute</option>
-                        <option value="svago">Svago</option>
-                        <option value="altro">Altro</option>
-                    </select>
-                    <button id="clearAll" class="btn-clear">
-                        <i class="fas fa-trash"></i> Cancella Tutto
-                    </button>
+                <div class="header-left">
+                    <h2><i class="fas fa-list"></i> Cronologia Spese</h2>
+                    <div class="summary">
+                        Totale: <span id="expensesTotal">0</span> spese • 
+                        Questo mese: <span id="thisMonthTotal">0</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="filters">
+                        <div class="filter-group">
+                            <select id="filterCategory" class="filter-select">
+                                <option value="all">Tutte le categorie</option>
+                                <option value="cibo">Cibo</option>
+                                <option value="trasporti">Trasporti</option>
+                                <option value="bollette">Bollette</option>
+                                <option value="casa">Casa</option>
+                                <option value="salute">Salute</option>
+                                <option value="svago">Svago</option>
+                                <option value="shopping">Shopping</option>
+                                <option value="altro">Altro</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <select id="filterMonth" class="filter-select">
+                                <option value="all">Tutti i mesi</option>
+                                <!-- JavaScript popolerà questo -->
+                            </select>
+                        </div>
+                        <button class="btn-filter" id="exportData">
+                            <i class="fas fa-download"></i> Esporta
+                        </button>
+                        <button class="btn-danger" id="clearAll">
+                            <i class="fas fa-trash"></i> Cancella Tutto
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -132,21 +380,33 @@
                             <th>Data</th>
                             <th>Descrizione</th>
                             <th>Categoria</th>
+                            <th>Pagamento</th>
                             <th>Importo</th>
                             <th>Azioni</th>
                         </tr>
                     </thead>
                     <tbody id="expensesTableBody">
-                        <!-- Le spese appariranno qui -->
                         <tr class="empty-row">
-                            <td colspan="5">
+                            <td colspan="6">
                                 <div class="empty-state">
                                     <i class="fas fa-receipt"></i>
-                                    <p>Nessuna spesa registrata. Aggiungi la prima!</p>
+                                    <h3>Nessuna spesa registrata</h3>
+                                    <p>Aggiungi la tua prima spesa utilizzando il modulo sopra.</p>
+                                    <p class="empty-tip">💡 <strong>Suggerimento:</strong> Traccia tutte le tue spese per avere un quadro finanziario completo.</p>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="footer-total">
+                                <strong>Totale Mensile:</strong>
+                            </td>
+                            <td colspan="2" class="footer-amount">
+                                <strong>€ <span id="tableTotal">0.00</span></strong>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </section>
@@ -155,12 +415,79 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>HomeBudget &copy; 2024 - Creato con ❤️ per gestire meglio le tue finanze</p>
-            <p class="footer-note">100% Gratuito · Nessun Account Richiesto · Dati salvati sul tuo browser</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-wallet"></i>
+                        <h3>HomeBudget <span class="pro-badge">PRO</span></h3>
+                    </div>
+                    <p>La soluzione completa per la gestione delle tue finanze personali.</p>
+                    <div class="footer-badges">
+                        <span class="badge"><i class="fas fa-lock"></i> Sicuro</span>
+                        <span class="badge"><i class="fas fa-bolt"></i> Veloce</span>
+                        <span class="badge"><i class="fas fa-mobile-alt"></i> Mobile</span>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Piani</h4>
+                    <ul>
+                        <li><a href="#" id="footerFree">Piano Free</a></li>
+                        <li><a href="#" id="footerMonthly">PRO Mensile (€4.99)</a></li>
+                        <li><a href="#" id="footerYearly">PRO Annuale (€49.99)</a></li>
+                        <li><a href="#" id="footerCompare">Confronta Piani</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Supporto</h4>
+                    <ul>
+                        <li><a href="#">Guida all'uso</a></li>
+                        <li><a href="#">Domande Frequenti</a></li>
+                        <li><a href="#">Contattaci</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Termini di Servizio</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Social</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <p>Resta aggiornato sulle novità</p>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="La tua email">
+                            <button type="button"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 HomeBudget PRO. Tutti i diritti riservati.</p>
+                <p class="footer-note">
+                    <i class="fas fa-heart"></i> Sviluppato con passione da Francesco Ciniero
+                </p>
+            </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
     <script src="js/app.js"></script>
+    <script src="js/payments.js"></script>
+    <script>
+        // Imposta la data di oggi come default
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+            document.getElementById('date').max = today;
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeBudget - Gestione Spese Personale</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <h1>HomeBudget</h1>
+            </div>
+            <p class="tagline">Gestisci le tue spese in modo semplice e gratuito</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Dashboard Stats -->
+        <section class="dashboard">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-euro-sign"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Spesa Totale</h3>
+                    <p class="stat-value">€ <span id="totalExpense">0.00</span></p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Spese Questo Mese</h3>
+                    <p class="stat-value" id="monthCount">0</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Media Mensile</h3>
+                    <p class="stat-value">€ <span id="monthlyAverage">0.00</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Aggiunta Spesa -->
+        <section class="add-expense">
+            <h2><i class="fas fa-plus-circle"></i> Aggiungi Nuova Spesa</h2>
+            <form id="expenseForm">
+                <div class="form-group">
+                    <label for="amount">
+                        <i class="fas fa-euro-sign"></i> Importo
+                    </label>
+                    <input type="number" id="amount" step="0.01" min="0" placeholder="0.00" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="category">
+                            <i class="fas fa-tag"></i> Categoria
+                        </label>
+                        <select id="category" required>
+                            <option value="">Scegli categoria</option>
+                            <option value="cibo">🍕 Cibo</option>
+                            <option value="trasporti">🚗 Trasporti</option>
+                            <option value="bollette">💡 Bollette</option>
+                            <option value="shopping">🛍️ Shopping</option>
+                            <option value="salute">🏥 Salute</option>
+                            <option value="svago">🎬 Svago</option>
+                            <option value="altro">📌 Altro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">
+                            <i class="fas fa-calendar"></i> Data
+                        </label>
+                        <input type="date" id="date" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">
+                        <i class="fas fa-align-left"></i> Descrizione (opzionale)
+                    </label>
+                    <input type="text" id="description" placeholder="Es: Spesa supermercato">
+                </div>
+                
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-save"></i> Salva Spesa
+                </button>
+            </form>
+        </section>
+
+        <!-- Lista Spese -->
+        <section class="expenses-list">
+            <div class="section-header">
+                <h2><i class="fas fa-list"></i> Le Tue Spese</h2>
+                <div class="filters">
+                    <select id="filterCategory">
+                        <option value="all">Tutte le categorie</option>
+                        <option value="cibo">Cibo</option>
+                        <option value="trasporti">Trasporti</option>
+                        <option value="bollette">Bollette</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="salute">Salute</option>
+                        <option value="svago">Svago</option>
+                        <option value="altro">Altro</option>
+                    </select>
+                    <button id="clearAll" class="btn-clear">
+                        <i class="fas fa-trash"></i> Cancella Tutto
+                    </button>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table id="expensesTable">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Descrizione</th>
+                            <th>Categoria</th>
+                            <th>Importo</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expensesTableBody">
+                        <!-- Le spese appariranno qui -->
+                        <tr class="empty-row">
+                            <td colspan="5">
+                                <div class="empty-state">
+                                    <i class="fas fa-receipt"></i>
+                                    <p>Nessuna spesa registrata. Aggiungi la prima!</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>HomeBudget &copy; 2024 - Creato con ❤️ per gestire meglio le tue finanze</p>
+            <p class="footer-note">100% Gratuito · Nessun Account Richiesto · Dati salvati sul tuo browser</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>

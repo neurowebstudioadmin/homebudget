@@ -12,136 +12,137 @@
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
+<body>
   <div class="hb-page">
     <!-- HEADER -->
     <header class="hb-header">
-  <div class="hb-logo">
-    <div class="hb-logo-icon">
-      <i class="fas fa-wallet"></i>
-    </div>
-    <div class="hb-logo-text">
-      <h1>HomeWallet <span class="hb-pro-badge">PRO</span></h1>
-      <p class="hb-tagline">Gestione finanziaria intelligente per la vita reale.</p>
-    </div>
-  </div>
+      <div class="hb-logo">
+        <div class="hb-logo-icon">
+          <i class="fas fa-wallet"></i>
+        </div>
+        <div class="hb-logo-text">
+          <h1>HomeWallet <span class="hb-pro-badge">PRO</span></h1>
+          <p class="hb-tagline">Gestione finanziaria intelligente per la vita reale.</p>
+        </div>
+      </div>
 
-  <div class="hb-user">
-    <div class="hb-plan">
-      <span class="hb-plan-badge hb-plan-free">FREE</span>
-      <span class="hb-plan-label">Piano Gratuito</span>
-    </div>
-    <button class="hb-btn hb-btn-upgrade" id="openUpgradeModal">
-      <i class="fas fa-crown"></i> Passa a PRO
-    </button>
-    <div class="hb-avatar">
-      <i class="fas fa-user"></i>
-    </div>
-  </div>
-</header>
+      <div class="hb-user">
+        <div class="hb-plan">
+          <span class="hb-plan-badge hb-plan-free">FREE</span>
+          <span class="hb-plan-label">Piano Gratuito</span>
+        </div>
+        <button class="hb-btn hb-btn-upgrade" id="openUpgradeModal">
+          <i class="fas fa-crown"></i> Passa a PRO
+        </button>
+        <div class="hb-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+      </div>
+    </header>
 
     <!-- CONTENUTO PRINCIPALE -->
     <main class="hb-main">
       <!-- DASHBOARD -->
       <section class="dashboard">
-  <!-- Spesa totale -->
-  <div class="stat-card">
-    <div class="stat-icon total-icon">
-      <i class="fas fa-euro-sign"></i>
-    </div>
-    <div class="stat-info">
-      <h3>Spesa Totale</h3>
-      <p class="stat-value">
-        € <span id="totalExpense">0.00</span>
-      </p>
-      <p class="stat-trend positive">
-        <i class="fas fa-arrow-up"></i>
-        12% vs scorso mese
-      </p>
-    </div>
-  </div>
+        <!-- Spesa totale -->
+        <div class="stat-card">
+          <div class="stat-icon total-icon">
+            <i class="fas fa-euro-sign"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Spesa Totale</h3>
+            <p class="stat-value">
+              € <span id="totalExpense">0.00</span>
+            </p>
+            <p class="stat-trend positive">
+              <i class="fas fa-arrow-up"></i>
+              12% vs scorso mese
+            </p>
+          </div>
+        </div>
 
-  <!-- Spese questo mese -->
-  <div class="stat-card">
-    <div class="stat-icon month-icon">
-      <i class="fas fa-calendar-alt"></i>
-    </div>
-    <div class="stat-info">
-      <h3>Spese Questo Mese</h3>
-      <p class="stat-value">
-        <span id="monthCount">0</span> / <span id="monthLimit">50</span>
-      </p>
-      <div class="progress-bar">
-        <div class="progress-fill" id="monthProgress" style="width: 0%"></div>
-      </div>
-      <p class="stat-note">
-        Ti restano <span id="remainingExpenses">50</span> spese nel piano FREE
-      </p>
-    </div>
-  </div>
+        <!-- Spese questo mese -->
+        <div class="stat-card">
+          <div class="stat-icon month-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Spese Questo Mese</h3>
+            <p class="stat-value">
+              <span id="monthCount">0</span> / <span id="monthLimit">50</span>
+            </p>
+            <div class="progress-bar">
+              <div class="progress-fill" id="monthProgress" style="width: 0%"></div>
+            </div>
+            <p class="stat-note">
+              Ti restano <span id="remainingExpenses">50</span> spese nel piano FREE
+            </p>
+          </div>
+        </div>
 
-  <!-- Media mensile -->
-  <div class="stat-card">
-    <div class="stat-icon average-icon">
-      <i class="fas fa-chart-line"></i>
-    </div>
-    <div class="stat-info">
-      <h3>Media Mensile</h3>
-      <p class="stat-value">
-        € <span id="monthlyAverage">0.00</span>
-      </p>
-      <p class="stat-trend negative">
-        <i class="fas fa-arrow-down"></i>
-        5% vs media ultimi mesi
-      </p>
-    </div>
-  </div>
+        <!-- Media mensile -->
+        <div class="stat-card">
+          <div class="stat-icon average-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Media Mensile</h3>
+            <p class="stat-value">
+              € <span id="monthlyAverage">0.00</span>
+            </p>
+            <p class="stat-trend negative">
+              <i class="fas fa-arrow-down"></i>
+              5% vs media ultimi mesi
+            </p>
+          </div>
+        </div>
 
-  <!-- Budget residuo -->
-  <div class="stat-card pro-feature">
-    <div class="stat-icon pro-icon">
-      <i class="fas fa-crown"></i>
-    </div>
-    <div class="stat-info">
-      <h3>Budget Residuo</h3>
-      <p class="stat-value">
-        € <span id="budgetRemaining">0.00</span>
-      </p>
-      <p class="stat-note">
-        Funzione PRO – sblocca budget predittivo e alert intelligenti.
-      </p>
-    </div>
-  </div>
+        <!-- Budget residuo -->
+        <div class="stat-card pro-feature">
+          <div class="stat-icon pro-icon">
+            <i class="fas fa-crown"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Budget Residuo</h3>
+            <p class="stat-value">
+              € <span id="budgetRemaining">0.00</span>
+            </p>
+            <p class="stat-note">
+              Funzione PRO – sblocca budget predittivo e alert intelligenti.
+            </p>
+          </div>
+        </div>
 
-  <!-- Top categoria mese -->
-  <div class="stat-card">
-    <div class="stat-icon stat-icon-topcat">
-      <i class="fas fa-fire"></i>
-    </div>
-    <div class="stat-info">
-      <h3>Top categoria (mese)</h3>
-      <p class="stat-value" id="topCategoryName">–</p>
-      <p class="stat-note">
-        Totale: € <span id="topCategoryTotal">0.00</span>
-      </p>
-    </div>
-  </div>
+        <!-- Top categoria mese -->
+        <div class="stat-card">
+          <div class="stat-icon stat-icon-topcat">
+            <i class="fas fa-fire"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Top categoria (mese)</h3>
+            <p class="stat-value" id="topCategoryName">–</p>
+            <p class="stat-note">
+              Totale: € <span id="topCategoryTotal">0.00</span>
+            </p>
+          </div>
+        </div>
 
-  <!-- Giorni con spese -->
-  <div class="stat-card">
-    <div class="stat-icon stat-icon-days">
-      <i class="fas fa-sun"></i>
-    </div>
-    <div class="stat-info">
-      <h3>Giorni con spese</h3>
-      <p class="stat-value">
-        <span id="spentDaysCount">0</span> giorni
-      </p>
-      <p class="stat-note">
-        Nel mese corrente in cui hai registrato almeno una spesa.
-      </p>
-    </div>
-  </div>
-</section>
+        <!-- Giorni con spese -->
+        <div class="stat-card">
+          <div class="stat-icon stat-icon-days">
+            <i class="fas fa-sun"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Giorni con spese</h3>
+            <p class="stat-value">
+              <span id="spentDaysCount">0</span> giorni
+            </p>
+            <p class="stat-note">
+              Nel mese corrente in cui hai registrato almeno una spesa.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <!-- FORM + TABELLA -->
       <section class="hb-content">
@@ -221,7 +222,8 @@
               </label>
               <div class="input-with-icon">
                 <i class="fas fa-align-left"></i>
-                <input type="text" id="description" placeholder="Es. Spesa settimanale al supermercato..." />
+                <input type="text" id="description"
+                       placeholder="Es. Spesa settimanale al supermercato..." />
               </div>
             </div>
 
@@ -242,7 +244,8 @@
             <div class="header-left">
               <h2><i class="fas fa-list"></i> Cronologia Spese</h2>
               <div class="summary">
-                Totale <span id="expensesTotal">0</span> spese • Questo mese: <span id="thisMonthTotal">0</span>
+                Totale <span id="expensesTotal">0</span> spese • Questo mese:
+                <span id="thisMonthTotal">0</span>
               </div>
             </div>
             <div class="header-right">
@@ -293,10 +296,97 @@
         </section>
       </section>
     </main>
+
+    <!-- FOOTER -->
+    <footer class="hb-footer">
+      <div class="hb-footer-inner">
+        <div class="hb-footer-top">
+          <div class="hb-footer-col">
+            <h2 class="hb-footer-logo">HomeBudget PRO</h2>
+            <p class="hb-footer-text">
+              Il tuo alleato intelligente per la gestione delle finanze personali.
+              Semplice, sicuro e potente.
+            </p>
+            <div class="hb-footer-social">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <div class="hb-footer-col">
+            <h3>Link Rapidi</h3>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/piani">Piani &amp; Prezzi</a></li>
+              <li><a href="/funzionalita">Funzionalità</a></li>
+              <li><a href="/blog">Blog &amp; Guide</a></li>
+              <li><a href="/faq">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div class="hb-footer-col">
+            <h3>Risorse</h3>
+            <ul>
+              <li><a href="/documentazione">Documentazione</a></li>
+              <li><a href="/api">API per sviluppatori</a></li>
+              <li><a href="/app-mobile">App Mobile</a></li>
+              <li><a href="/estensione">Estensione Browser</a></li>
+              <li><a href="/template">Template Budget</a></li>
+            </ul>
+          </div>
+
+          <div class="hb-footer-col hb-footer-contact">
+            <h3>Contatti</h3>
+            <ul>
+              <li><i class="fas fa-envelope"></i><span>supporto@homebudgetpro.it</span></li>
+              <li><i class="fas fa-phone"></i><span>+39 02 1234 5678</span></li>
+              <li><i class="fas fa-map-marker-alt"></i><span>Milano, Italia</span></li>
+            </ul>
+            <div class="hb-footer-newsletter">
+              <h4>Newsletter</h4>
+              <div class="hb-footer-newsletter-row">
+                <input type="email" placeholder="La tua email" />
+                <button>Iscriviti</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="hb-footer-divider" />
+
+        <div class="hb-footer-bottom">
+          <p class="hb-footer-copy">
+            © 2023 HomeBudget PRO. Tutti i diritti riservati.
+          </p>
+          <div class="hb-footer-legal">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/termini">Termini di Servizio</a>
+            <a href="/cookie">Cookie Policy</a>
+          </div>
+          <div class="hb-footer-social hb-footer-social-bottom">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="hb-footer-disclaimer">
+          <p>
+            HomeBudget PRO è uno strumento di gestione finanziaria. Non siamo una banca
+            o un'istituzione finanziaria regolamentata. Le informazioni fornite sono a
+            scopo educativo e non costituiscono consiglio finanziario.
+          </p>
+        </div>
+      </div>
+    </footer>
   </div>
 
-  <!-- JS -->
-    <!-- JavaScript -->
+  <!-- JavaScript -->
   <script src="js/app.js"></script>
 </body>
 </html>

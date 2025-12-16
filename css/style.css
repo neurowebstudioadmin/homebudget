@@ -28,13 +28,13 @@ body {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(18px);
-  background: linear-gradient(120deg, rgba(67,97,238,0.95), rgba(114,9,183,0.95));
-  color: #fff;
+  background: linear-gradient(120deg, #f5f7ff, #dde7ff); /* header chiaro */
+  color: #111827;
   padding: 16px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
 }
 
 .hb-logo {
@@ -46,11 +46,12 @@ body {
 .hb-logo {
   display: flex;
   align-items: center;
+  padding-left: 24px; /* un po' di respiro dal bordo */
 }
 
-.hb-logo-img {
+.hb-logo img {
   display: block;
-  height: 56px;   /* regola questa se lo vuoi più grande/piccolo */
+  height: 72px;   /* PRIMA era molto più piccolo, ora bello grande */
   width: auto;
 }
 

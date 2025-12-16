@@ -30,7 +30,7 @@ body {
   backdrop-filter: blur(14px);
   background: #2f4881; /* blu notte neutro, non disturba i colori del logo */
   color: #fff;
-  padding: 4px 16px; /* PIÙ BASSA in verticale */
+  padding: 1px 22px; /* PIÙ BASSA in verticale */
   display: flex;
   align-items: center;
   justify-content: space-between;

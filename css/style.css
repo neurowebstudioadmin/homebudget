@@ -28,7 +28,7 @@ body {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(14px);
-  background: #0f172a; /* blu notte neutro, non disturba i colori del logo */
+  background: #2f4881; /* blu notte neutro, non disturba i colori del logo */
   color: #fff;
   padding: 10px 28px; /* PIÙ BASSA in verticale */
   display: flex;
@@ -44,7 +44,7 @@ body {
 
 .hb-logo-img {
   display: block;
-  height: 96px;   /* grande ma non esagerato */
+  height: 200px;   /* grande ma non esagerato */
   width: auto;
   margin-left: 4px;
 }

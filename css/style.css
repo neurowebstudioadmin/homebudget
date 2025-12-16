@@ -43,25 +43,16 @@ body {
   gap: 16px;
 }
 
-.hb-logo-icon {
-  width: 64px;
-  height: 64px;
-  /* niente background, niente shadow: solo contenitore */
-  border-radius: 0;
-  background: transparent;
+.hb-logo {
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: none;
 }
 
-.hb-logo-icon .logo-img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  border-radius: 0;
+.hb-logo-img {
+  display: block;
+  height: 56px;   /* regola questa se lo vuoi più grande/piccolo */
+  width: auto;
 }
-
 
 /* e aggiorna la tagline */
 

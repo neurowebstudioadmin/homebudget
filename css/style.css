@@ -28,9 +28,9 @@ body {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(18px);
-  background: linear-gradient(120deg, #3b82f6, #8b5cf6); /* blu/viola più pulito */
+  background: linear-gradient(120deg, #2563eb, #9333ea); /* blu/viola deciso */
   color: #fff;
-  padding: 16px 32px;
+  padding: 18px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,16 +40,14 @@ body {
 .hb-logo {
   display: flex;
   align-items: center;
-  padding-left: 24px;
 }
 
 .hb-logo-img {
   display: block;
-  height: 100px;   /* bello grande */
+  height: 110px;   /* GRANDE e leggibile */
   width: auto;
+  margin-left: 8px;  /* leggero respiro dal bordo */
 }
-
-/* e aggiorna la tagline */
 
 .hb-logo-text h1 {
   margin: 0;

@@ -28,28 +28,26 @@ body {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(18px);
-  background: linear-gradient(120deg, #f5f7ff, #dde7ff); /* header chiaro */
-  color: #111827;
+  background: linear-gradient(120deg, #3b82f6, #8b5cf6); /* blu/viola più pulito */
+  color: #fff;
   padding: 16px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);
 }
 
 .hb-logo {
   display: flex;
   align-items: center;
-  padding-left: 24px; /* respiro dal bordo */
+  padding-left: 24px;
 }
 
-/* stile applicato alla CLASSE dell'immagine */
 .hb-logo-img {
   display: block;
-  height: 80px;   /* prova 80px: ben visibile */
+  height: 100px;   /* bello grande */
   width: auto;
 }
-
 
 /* e aggiorna la tagline */
 

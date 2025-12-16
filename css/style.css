@@ -40,20 +40,16 @@ body {
 .hb-logo {
   display: flex;
   align-items: center;
-  gap: 16px;
+  padding-left: 24px; /* respiro dal bordo */
 }
 
-.hb-logo {
-  display: flex;
-  align-items: center;
-  padding-left: 24px; /* un po' di respiro dal bordo */
-}
-
-.hb-logo img {
+/* stile applicato alla CLASSE dell'immagine */
+.hb-logo-img {
   display: block;
-  height: 72px;   /* PRIMA era molto più piccolo, ora bello grande */
+  height: 80px;   /* prova 80px: ben visibile */
   width: auto;
 }
+
 
 /* e aggiorna la tagline */
 
